@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+ sqlserver:
+  image: mcr.microsoft.com/mssql/server:2019-latest
+  container_name: ecommerce_db
+  restart: always
+  volumes:
+   - docker_sqlserver_systemdbs:/var/opt/mssql/
+   - docker_sqlserver_userdbs:/var/opt/sqlserver
+   - docker_sqlserver_mssqltools:/var/opt/mssql-tools/bin
+  environment:
+   - MSSQL_SA_PASSWORD=S8KaYSd9CW7cnfG1KSRA
+   - ACCEPT_EULA=Y
+   - MSSQL_PID=Developer
+  ports:
+   - 1433:1433
+  
+volumes:
+ docker_sqlserver_systemdbs:
+  driver: local
+ docker_sqlserver_userdbs:
+  driver: local
+ docker_sqlserver_mssqltools:
+  driver: local

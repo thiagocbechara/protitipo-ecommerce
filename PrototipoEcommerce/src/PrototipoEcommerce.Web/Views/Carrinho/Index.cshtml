@@ -1,0 +1,66 @@
+﻿@model PrototipoEcommerce.Domain.Carrinhos.Entities.Carrinho
+
+@{
+    ViewData["Title"] = "Detalhes do Carrinho";
+}
+
+<h1>Detalhes do Carrinho</h1>
+
+<div>
+    <h4>Carrinho</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    Preço
+                </th>
+                <th>
+                    Promoção
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Itens)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        R$ @item.ValorTotal().ToString("##########.##")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomePromocao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remover Item", "RemoverDoCarrinho", new { carrinhoId = item.Carrinho.Id, itemId = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    R$ @Model.ValorTotal.ToString("##########.##")
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
